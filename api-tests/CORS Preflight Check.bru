@@ -1,0 +1,28 @@
+meta {
+  name: CORS Preflight Check
+  type: http
+  seq: 4
+}
+
+options {
+  url: {{base_url}}/api/extract-epd
+  body: none
+  auth: none
+}
+
+headers {
+  Origin: https://happy-smoke-03817c603.5.azurestaticapps.net
+  Access-Control-Request-Method: POST
+  Access-Control-Request-Headers: Content-Type
+}
+
+tests {
+  test("should return 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("should have CORS headers", function() {
+    expect(res.headers['access-control-allow-origin']).to.exist;
+    expect(res.headers['access-control-allow-methods']).to.exist;
+  });
+}

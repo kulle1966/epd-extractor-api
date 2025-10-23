@@ -1,0 +1,43 @@
+meta {
+  name: Extract EPD - Door Handle
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/extract-epd
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  pdf: @file(C:\DEV\Matelio_ki_showcase\V_202409_ECO_EPD_Door-and-window-handles.pdf)
+}
+
+tests {
+  test("should return 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("should have success true", function() {
+    expect(res.body.success).to.equal(true);
+  });
+  
+  test("should have CO2 calculation", function() {
+    expect(res.body.carbonFootprintPerKg).to.exist;
+    expect(res.body.carbonFootprintPerKg.value).to.exist;
+  });
+  
+  test("should extract door handle data", function() {
+    expect(res.body.data).to.exist;
+    expect(res.body.data.product_name).to.exist;
+  });
+  
+  test("CO2 value should be calculable for door handle", function() {
+    expect(res.body.carbonFootprintPerKg.value).to.not.equal("Not calculable");
+  });
+}

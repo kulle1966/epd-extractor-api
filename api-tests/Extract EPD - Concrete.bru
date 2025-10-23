@@ -1,0 +1,43 @@
+meta {
+  name: Extract EPD - Concrete
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/api/extract-epd
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  pdf: @file(C:\DEV\Matelio_ki_showcase\2023-10-20-EPD-C8-10.pdf)
+}
+
+tests {
+  test("should return 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("should have success true", function() {
+    expect(res.body.success).to.equal(true);
+  });
+  
+  test("should have CO2 calculation", function() {
+    expect(res.body.carbonFootprintPerKg).to.exist;
+    expect(res.body.carbonFootprintPerKg.value).to.exist;
+  });
+  
+  test("should extract material data", function() {
+    expect(res.body.data).to.exist;
+    expect(res.body.data.product_name).to.exist;
+  });
+  
+  test("CO2 value should be calculable for concrete", function() {
+    expect(res.body.carbonFootprintPerKg.value).to.not.equal("Not calculable");
+  });
+}
