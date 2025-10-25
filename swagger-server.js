@@ -174,7 +174,14 @@ const server = http.createServer((req, res) => {
                 description: "Azure Functions API für die Extraktion von Environmental Product Declaration (EPD) Daten aus PDF-Dokumenten."
             },
             servers: [
-                { url: "http://localhost:7071/api", description: "Local Development Server" }
+                { 
+                    url: "https://epd-extractor-api-2025.azurewebsites.net/api", 
+                    description: "Azure Production Server" 
+                },
+                { 
+                    url: "http://localhost:7071/api", 
+                    description: "Local Development Server" 
+                }
             ],
             paths: {
                 "/extract-epd": {

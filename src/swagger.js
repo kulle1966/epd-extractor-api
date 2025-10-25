@@ -12,6 +12,10 @@ const openApiSpec = {
   },
   servers: [
     {
+      url: 'https://epd-extractor-api-2025.azurewebsites.net/api',
+      description: 'Azure Production Server'
+    },
+    {
       url: 'http://localhost:7071/api',
       description: 'Local Development Server'
     }
