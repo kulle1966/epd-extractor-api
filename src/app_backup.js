@@ -2,9 +2,6 @@ const { app } = require('@azure/functions');
 const pdf = require('pdf-parse');
 const fs = require('fs');
 
-// Import Swagger endpoints
-require('./swagger');
-
 // Main app entry point for Azure Functions v4
 app.setup({
     enableHttpStream: true,

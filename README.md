@@ -26,6 +26,18 @@ EPD PDF → Azure Functions → Azure OpenAI → Strukturierte Daten + CO2-Berec
 
 ## 📋 API Endpoints
 
+### 📚 API Documentation (Swagger UI)
+```http
+GET /api/docs
+```
+Vollständige interaktive API-Dokumentation mit Swagger UI.
+
+### 📄 OpenAPI Specification
+```http
+GET /api/docs/swagger.json
+```
+OpenAPI 3.0 Spezifikation im JSON-Format.
+
 ### Health Check
 ```http
 GET /api/health
